@@ -1,0 +1,24 @@
+{% extends 'chat/base.html' %} 
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container">
+{% for obj in object_list %}
+<div class="flex-row">
+{{obj.post_date}} {{obj.recipient}}
+</div>
+<div class=" card-text"> 
+{{obj.content}}
+
+</div>
+{% endfor %}
+<form method="POST">
+{% csrf_token %}
+<fieldset class="form-group">
+{{form|crispy}}
+</fildset>
+<div class="form-group">
+<button class="btn btn-outline-info" type="submit">Send</button>
+</div>
+</form>
+</div>
+{% endblock content %}

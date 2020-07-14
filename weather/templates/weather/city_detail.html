@@ -1,0 +1,24 @@
+{% extends 'chat/base.html' %}
+{% block content %}
+<div class="container">
+<div>
+<h1 class="display-2">{{object.name}}</h1>
+<!-- <img src="{{icon_url}}"  class="w-25 col-7 float-right img-fluid"> -->
+</div>
+<div class="row w-75">
+
+<div class="col-3"> {{object.country}} </div>
+<div class="col-5 float-left">Cooridinates: {{object.lat}} {{object.lon}}</div>
+
+</div>
+
+<div class="row">
+<div>
+Temperature: {{temp}} 
+</div>
+Feels Like Temperature: {{feels_like}}
+Pressure: {{pressure}}
+Humidity: {{humidity}}
+Wind: {{wind_speed}}
+</div>
+{% endblock content %}

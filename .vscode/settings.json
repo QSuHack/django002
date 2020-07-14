@@ -1,3 +1,6 @@
 {
-    "python.pythonPath": "c:\\Projects\\VSCodeProjects\\environments\\djangoversion001\\Scripts\\python.exe"
+    "python.pythonPath": "c:\\Projects\\VSCodeProjects\\environments\\djangoversion001\\Scripts\\python.exe",
+    "python.linting.pylintEnabled": true,
+    "python.linting.enabled": true,
+    "python.linting.pycodestyleEnabled": false
 }

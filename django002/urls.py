@@ -15,8 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from weather.views import search_view, CityDetailView
+from chat.views import MessageListView, MessageCreateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-
+    path('search/',search_view,name="weather-search"),
+    path('city/<int:pk>',CityDetailView.as_view(),name="weather-city_detail" ),
+    path('messages/', MessageListView.as_view(), name="messages-view"),
 ]
