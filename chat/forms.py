@@ -4,3 +4,8 @@ class MessageForm(forms.ModelForm):
     class Meta:
         model = Message
         fields = ("content","recipient")
+
+class MessageFormSpecific(forms.ModelForm):
+    class Meta:
+        model=Message
+        fields = ("content",)

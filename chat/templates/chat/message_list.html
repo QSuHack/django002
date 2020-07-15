@@ -1,7 +1,9 @@
 {% extends 'chat/base.html' %} 
 {% load crispy_forms_tags %}
-{% block content %}
-<div class="container">
+{% block content%}
+<div>
+<iframe class=" container w-25 float-left" src="{% url 'messages-view' %}" style="height:100%!important%"> </iframe>
+<div class="container w-75 float-right" >
 {% for obj in object_list %}
 <div class="flex-row">
 {{obj.post_date}} {{obj.recipient}}
@@ -20,5 +22,6 @@
 <button class="btn btn-outline-info" type="submit">Send</button>
 </div>
 </form>
+</div>
 </div>
 {% endblock content %}
