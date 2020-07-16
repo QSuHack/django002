@@ -1,0 +1,16 @@
+.message_send_date{
+    display: none;
+}
+.messbox:hover  >  .message_send_date{
+    display: block;
+}
+.message_send_content{
+    background-color: rgb(233, 233, 240);
+}
+.message_rec_content{
+    background-color: rgb(6, 85, 255);
+}
+.message_content{
+    margin: 15px;
+    padding: 25px;
+}

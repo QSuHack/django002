@@ -1,26 +1,52 @@
 {% extends 'chat/base.html' %} 
 {% load crispy_forms_tags %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'chat/chat.css' %}">
+{% endblock head %}
 {% block content%}
+
 <div>
 <iframe class=" container w-25 float-left" src="{% url 'messages-view' %}" style="height:100%!important%"> </iframe>
-<div class="container w-75 float-right" >
-{% for obj in object_list %}
-<div class="flex-row">
-{{obj.post_date}} {{obj.recipient}}
-</div>
-<div class=" card-text"> 
-{{obj.content}}
+<div class="container-fluid w-75 float-right " >
 
-</div>
-{% endfor %}
+    {% for obj in object_list %}
+    {% if obj.recipient == user %}
+    <div class="row">
+        <div class="col-6 text-left messbox   text-break text-wrap">
+            <div class=" message_content message_send_content   rounded-pill "> 
+                {{obj.content}}        
+            </div><div class="message_send_date text-secondary">
+                {{obj.post_date |date:"H:i d.m.Y" }}
+                </div>
+        </div>
+        <div class="col-6"></div>
+    </div>
+    {% else %}
+    <div class="row">
+    <div class="col-6"></div>
+    <div class="flex-row col-6 text-right text-wrap text-break messbox">
+        <div class="message_content message_rec_content text-white col rounded-pill "> 
+        {{obj.content}}
+        </div>
+            <div class="message_send_date text-secondary">
+                {{obj.post_date |date:"H:i d.m.Y" }}
+            </div> 
+         
+    </div>
+    </div>
+    {% endif %}
+
+    {% endfor %}
+
 <form method="POST">
 {% csrf_token %}
 <fieldset class="form-group">
 {{form|crispy}}
 </fildset>
-<div class="form-group">
-<button class="btn btn-outline-info" type="submit">Send</button>
-</div>
+    <div class="form-group">
+    <button class="btn btn-outline-info" type="submit">Send</button>
+    </div>
 </form>
 </div>
 </div>

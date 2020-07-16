@@ -17,7 +17,6 @@ from django.contrib import admin
 from django.urls import path, include
 from weather.views import search_view, CityDetailView
 from chat.views import MessageListView, MessageCreateView, MessageSeparetedListView, UserListView
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('search/',search_view,name="weather-search"),
