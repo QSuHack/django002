@@ -1,5 +1,7 @@
 from django.shortcuts import render, HttpResponse, redirect
 from django.views.generic import DetailView
+from django.http import Http404
+from django.db.models import F, Func
 from .forms import SearchBox
 from .models import City
 import requests
@@ -7,13 +9,23 @@ import requests
 from django002.settings import WEATHER_API_KEY
 
 
+
 def search_view(request):
     if request.method =="POST":
         form = SearchBox(request.POST)
         if form.is_valid():
-            selected_city = City.objects.filter(name=form.cleaned_data["name"]).first()
+            name = form.cleaned_data["name"]
+            if name == "":
+               selected_city = City.objects.annotate(abs_diff=Func(F('lon')-form.cleaned_data["longitude"], function="ABS")).order_by('abs_diff').first()
+               if form.cleaned_data["longitude"] is None:
+                   selected_city = City.objects.annotate(abs_diff=Func(F('lat')-form.cleaned_data["latitude"], function="ABS")).order_by('abs_diff').first()
+               return redirect(selected_city)
+            if len(name)<2:
+                raise Http404("Not Found")
+            name = name[0].upper() + name[1::].lower()
+            selected_city = City.objects.filter(name=name).first()
             if selected_city is None:
-                return HttpResponse(content="nie znaleziono")
+                return HttpResponse(content="Not Found")
             return redirect(selected_city)
     else:
         form = SearchBox()

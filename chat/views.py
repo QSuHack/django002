@@ -75,5 +75,4 @@ class UserListView(LoginRequiredMixin, ListView):
             l.append(x.get('sender'))
         l = list(set(l))
         subquery = User.objects.filter(id__in = l )
-        print(subquery3)
         return subquery 
