@@ -11,19 +11,8 @@
 <div class="container-fluid w-75 float-right " >
 
     {% for obj in object_list %}
-    {% if obj.recipient == user %}
-    <div class="row">
-        <div class="col-8 text-left messbox   text-break text-wrap">
-            <div class=" message_content message_send_content   rounded-pill "> 
-                {{obj.content}}        
-            </div><div class="message_send_date text-secondary">
-                {{obj.post_date |date:"H:i d.m.Y" }}
-                </div>
-        </div>
-        <div class="col-4"></div>
-    </div>
-    {% else %}
-    <div class="row">
+    {% if obj.recipient != user %}
+   <div class="row">
     <div class="col-4"></div>
     <div class="flex-row col-8 text-right text-wrap text-break messbox">
         <div class="message_content message_rec_content text-white col rounded-pill "> 
@@ -34,6 +23,17 @@
             </div> 
          
     </div>
+    </div>
+    {% else %}
+     <div class="row">
+        <div class="col-8 text-left messbox   text-break text-wrap">
+            <div class=" message_content message_send_content   rounded-pill "> 
+                {{obj.content}}        
+            </div><div class="message_send_date text-secondary">
+                {{obj.post_date |date:"H:i d.m.Y" }}
+                </div>
+        </div>
+        <div class="col-4"></div>
     </div>
     {% endif %}
 

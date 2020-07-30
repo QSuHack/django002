@@ -15,7 +15,11 @@ class MessageListView(LoginRequiredMixin, ListView):
     model = Message
 
     def get_queryset(self):
-        query = Message.objects.filter(recipient=self.request.user) | Message.objects.filter(sender=self.request.user)
+        query = (Message.objects.filter(recipient=self.request.user) 
+         | Message.objects.filter(sender=self.request.user) 
+        
+         )
+
         return query.order_by('post_date')
 
 
@@ -44,7 +48,11 @@ class MessageSeparetedListView(LoginRequiredMixin, ListView):
     model = Message
     def get_queryset(self, *args, **kwargs):
         second_user = User.objects.get(id=self.kwargs["pk"])
-        query = Message.objects.filter(recipient=self.request.user, sender=second_user) | Message.objects.filter(sender=self.request.user, recipient=second_user)
+        query = (
+                Message.objects.filter(recipient=self.request.user, sender=second_user) 
+                | Message.objects.filter(sender=self.request.user, recipient=second_user )
+                | Message.group.get_queryset(member=self.request.user)
+                )
         return query.order_by('post_date')
     def post(self, *args, **kwargs):
         form = MessageFormSpecific(self.request.POST)
