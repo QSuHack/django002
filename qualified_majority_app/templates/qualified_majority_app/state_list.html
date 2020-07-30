@@ -1,0 +1,30 @@
+{% extends 'chat/base.html' %}
+{% block content %}
+{% load static %}
+<div class="container-fluid">
+    <h1>You can check here qualified majority in Council of the European Union </h1>
+    <h2 class="text-success">Green to pass</h2>
+    <h2 class="text-danger">Red to reject</h2>
+    <div class="progress">
+        <div class="progress-bar" id ="progress_bar_population" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+     <div class="progress">
+        <div class="progress-bar" id ="progress_bar_country" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="27"></div>
+    </div>
+    <div class="">
+        {% for object in object_list %}
+            <div class="form-check" >
+                <label class="form-check-label col-4"for="checkbox_{{object.id}}"><h3>{{object.name}}</h3></label>
+                <input class="form-check-input checkbox col-2" type="checkbox" onclick=update_bar() name="{{object.name}}" id="checkbox_{{object.id}}" >
+            </div>
+        {% endfor %}
+    </div>
+    <script>
+        var DATA_JS = {{dataJS|safe}};
+        var population_total = {{populationJS|safe}};
+        var area_total = {{areaJS|safe}};
+        var number_of_members = {{countries_num|safe}}
+    </script>
+    <script src="{% static 'qualified_majority_app/progress.js' %}"></script>
+</div>
+{% endblock content %}

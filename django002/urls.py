@@ -23,6 +23,6 @@ urlpatterns = [
     path('city/<int:pk>',CityDetailView.as_view(),name="weather-city_detail" ),
  #   path('messages/', MessageListView.as_view(), name="messages-view"),
     path('messages/', UserListView.as_view(), name="messages-view"),
-
+    path('EU/', include('qualified_majority_app.urls')),
     path('messages/<int:pk>', MessageSeparetedListView.as_view(), name='messages-sep')
 ]

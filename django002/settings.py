@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'chat.apps.ChatConfig',
     'weather.apps.WeatherConfig',
+    'qualified_majority_app.apps.QualifiedMajorityAppConfig'
 ]
 
 MIDDLEWARE = [
