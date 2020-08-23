@@ -1,0 +1,34 @@
+{% extends 'chat/base.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'todos/list.css' %}">
+{% endblock head %}
+
+{% block content %}
+
+<div class="container-fluid">
+<div class="row">
+    <div class="col-md-10 text-info text-center">
+    <h2 class="">Archived Tasks</h2>
+    </div> 
+    <a class="col-md-2" href="{% url 'task-list' %}"><button class="btn btn-success">Return to active task</button></a>
+</div>
+<div class="row">
+    <div class="col-md-8">
+        {% for obj in object_list %}
+            <div class="todoblock todotodo border bg-secondary text-white ">
+                    <small class="row"> <h5 class="col-md-7">{{obj.title}}</h4> <div class="col-md-5"> {{obj.expiry_time|date:"d.m.Y"}} </div> </small>
+                    <div>
+                        {{obj.details}}
+                    </div>
+                    <div class="invisible"> {{obj.id}}</div>
+                    <button class="btn btn-info  "onclick=moveTask(this,0)>Reactivate</button>
+            </div> 
+        {% endfor %}
+    </div>
+</div>
+
+</div>
+ {% csrf_token %}
+<script src="{% static 'todos/list.js' %}">
+{% endblock content %}

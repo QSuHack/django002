@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'chat.apps.ChatConfig',
     'weather.apps.WeatherConfig',
+    'qualified_majority_app.apps.QualifiedMajorityAppConfig',
+    'todos.apps.TodosConfig',
 ]
 
 MIDDLEWARE = [
@@ -110,7 +112,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Warsaw'
 
 USE_I18N = True
 
@@ -118,9 +120,17 @@ USE_L10N = True
 
 USE_TZ = True
 
+DATETIME_INPUT_FORMATS = [
+    '%d.%m.%Y %H:%i',
+    '%Y-%m-%d %H:%i:%S',
+    '%Y-%m-%d %H:%i',   
+    '%d/%m/%Y %H:%i',
+    
+]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT='/static/'
 X_FRAME_OPTIONS = 'SAMEORIGIN'
