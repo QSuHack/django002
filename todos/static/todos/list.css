@@ -1,0 +1,17 @@
+.todoblock{
+    margin:15px;
+    padding:5px;
+}
+.todotodo{
+    background-color: lightgoldenrodyellow;
+    border-block-color: yellow;
+
+}
+.todoprogress{
+    background-color: lightskyblue;
+    border-block-color: rgb(10, 6, 245);
+}
+.tododone{
+    background-color: seagreen;
+    border-block-color: rgb(2, 250, 76);
+}

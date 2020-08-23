@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from weather.views import search_view, CityDetailView
 from chat.views import MessageListView, MessageCreateView, MessageSeparetedListView, UserListView
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('search/',search_view,name="weather-search"),
@@ -24,5 +25,6 @@ urlpatterns = [
  #   path('messages/', MessageListView.as_view(), name="messages-view"),
     path('messages/', UserListView.as_view(), name="messages-view"),
     path('EU/', include('qualified_majority_app.urls')),
-    path('messages/<int:pk>', MessageSeparetedListView.as_view(), name='messages-sep')
+    path('messages/<int:pk>', MessageSeparetedListView.as_view(), name='messages-sep'),
+    path('task/', include('todos.urls')),
 ]

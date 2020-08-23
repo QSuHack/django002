@@ -1,0 +1,61 @@
+{% extends 'chat/base.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'todos/list.css' %}">
+{% endblock head %}
+
+{% block content %}
+
+<div class="container-fluid">
+<div class="row">
+    <div class="col-md-8 text-info text-center">
+    <h2 class=""> Task Manager</h2>
+    </div> 
+    <a class="col-md-2" href="{% url 'create-task' %}"><button class="btn btn-success">New Task</button></a>
+    <a class="col-md-2" href="{% url 'archive-task' %}"><button class="btn btn-secondary">Archives</button></a>
+</div>
+<div class="row">
+<div class="col-md-4">
+    {% for obj in object_list %}
+  
+    {% if obj.task_status == 0 %} 
+       <div class="todoblock todotodo border bg-warning text-white ">
+            <small class="row"> <h5 class="col-md-7">{{obj.title}}</h4> <div class="col-md-5"> {{obj.expiry_time|date:"d.m.Y"}} </div> </small>
+            <div>
+                {{obj.details}}
+            </div>
+            <div class="invisible"> {{obj.id}}</div>
+            <button class="btn btn-info  "onclick=moveTask(this,1)>Start work with it</button>
+       </div>{% endif %} {% endfor %}</div>
+<div class="col-md-4" id="in_doing_col">
+    {% for obj in object_list %}
+    {% if obj.task_status == 1 %}
+       <div class="todoblock todoprogress border bg-primary text-white">
+            <small class="row"><h5 class="col-md-7">{{obj.title}}</h4> <div class="col-md-5"> {{obj.expiry_time|date:"d.m.Y"}} </div></small>
+            <div>
+                {{obj.details}}
+            </div>
+            <div class="invisible"> {{obj.id}}</div>
+             <button class="btn btn-success" onclick=moveTask(this,2)>It's done</button>
+       </div>{% endif %} 
+    {% endfor %}
+</div>
+<div class="col-md-4" id="done_col">
+       {% for obj in object_list %}
+          {% if obj.task_status == 2 %}
+       <div class=" todoblock tododone border bg-success text-white">
+            <small class="row"><h5 class="col-md-7">{{obj.title}}</h4> <div class="col-md-5"> {{obj.expiry_time|date:"d.m.Y"}} </div></small>
+            <div>
+                {{obj.details}}
+            </div>
+            <div class="invisible"> {{obj.id}}</div>
+             <button class="btn btn-danger" onclick=moveTask(this,3)>Archive it</button>
+       </div>{% endif %}
+       {% endfor %} 
+    </div>
+</div>
+
+</div>
+ {% csrf_token %}
+<script src="{% static 'todos/list.js' %}">
+{% endblock content %}
