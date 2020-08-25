@@ -15,10 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from weather.views import search_view, CityDetailView
-from chat.views import MessageListView, MessageCreateView, MessageSeparetedListView, UserListView
+from django.conf import settings
+from django.conf.urls.static import static
 
+from weather.views import search_view, CityDetailView
+from chat.views import MessageListView, MessageCreateView, MessageSeparetedListView, UserListView, home_view
 urlpatterns = [
+    path('', home_view, name="home-page"),
     path('admin/', admin.site.urls),
     path('search/',search_view,name="weather-search"),
     path('city/<int:pk>',CityDetailView.as_view(),name="weather-city_detail" ),
@@ -27,4 +30,8 @@ urlpatterns = [
     path('EU/', include('qualified_majority_app.urls')),
     path('messages/<int:pk>', MessageSeparetedListView.as_view(), name='messages-sep'),
     path('task/', include('todos.urls')),
-]
+    path('user/', include('users.urls')),
+    ]
+if settings.DEBUG:
+    urlpatterns +=static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    

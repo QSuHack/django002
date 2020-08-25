@@ -84,3 +84,6 @@ class UserListView(LoginRequiredMixin, ListView):
         l = list(set(l))
         subquery = User.objects.filter(id__in = l )
         return subquery 
+
+def home_view(request):
+    return render(request, "chat/home.html")

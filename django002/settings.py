@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'weather.apps.WeatherConfig',
     'qualified_majority_app.apps.QualifiedMajorityAppConfig',
     'todos.apps.TodosConfig',
+    'users.apps.UsersConfig',
 ]
 
 MIDDLEWARE = [
@@ -57,6 +58,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'django002.urls'
+LOGIN_REDIRECT_URL = "blog-home"
+LOGIN_URL = 'users-login'
 
 TEMPLATES = [
     {
@@ -134,3 +137,6 @@ DATETIME_INPUT_FORMATS = [
 STATIC_URL = '/static/'
 STATIC_ROOT='/static/'
 X_FRAME_OPTIONS = 'SAMEORIGIN'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'users/media')
+MEDIA_URL = '/media/'

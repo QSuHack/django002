@@ -1,0 +1,9 @@
+{% extends 'chat/base.html' %}
+{% block content %}
+<ul class="list-group">
+<li class="h2 list-group-item"><a href="{% url 'weather-search' %}">Search weather</a></li>
+<li class="h2 list-group-item"><a href="{% url 'messages-view' %}">See messages</a></li>
+<li class="h2 list-group-item"><a href="{% url 'eu-app' %}">Majority in European Council</a></li>
+<li class="h2 list-group-item"><a href="{% url 'task-list' %}">Task manager </a></li>
+</ul>
+{% endblock content %}
